@@ -1,0 +1,54 @@
+test2=imread('test2.png');
+test3=imread('test3.jpg');
+test4=imread('test4.bmp');
+test5=imread('test5.png');
+test6=imread('test6.jpg');
+[test1,map]=imread('test1.bmp');
+
+% test11=edge(test1,'Sobel');
+% test12=edge(test1,'Canny');
+% subplot(1,3,1)
+% imshow(test1);
+% subplot(1,3,2)
+% imshow(test11);
+% subplot(1,3,3)
+% imshow(test12);
+
+
+% test21=edge(test4,'Sobel');
+% test22=edge(test4,'Canny');
+% subplot(1,3,1)
+% imshow(test4);
+% subplot(1,3,2)
+% imshow(test21);
+% subplot(1,3,3)
+% imshow(test22);
+% test21=edge(test5,'Sobel');
+% test22=edge(test5,'Canny');
+% subplot(1,3,1)
+% imshow(test5);
+% subplot(1,3,2)
+% imshow(test21);
+% subplot(1,3,3)
+% imshow(test22);
+
+% test21=edge(test6,'Sobel');
+% test22=edge(test6,'Canny');
+% subplot(1,3,1)
+% imshow(test6);
+% subplot(1,3,2)
+% imshow(test21);
+% subplot(1,3,3)
+% imshow(test22);
+
+test11=double(test1);
+test12=test1;
+test11=edge(test11,'Canny');
+[H,theta,rho]=hough(test11,'ThetaResolution',0.2);
+peaks=houghpeaks(H,7);
+lines=houghlines(test11,theta,rho,peaks);
+figure,imshow(test12),hold on;
+for i=1:length(lines)
+    z=[lines(i).point1;lines(i).point2];
+    plot(z(:,1),z(:,2),'LineWidth',4,'Color','c');
+end
